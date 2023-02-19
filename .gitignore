@@ -489,3 +489,6 @@ $RECYCLE.BIN/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+#key
+API_key.txt
