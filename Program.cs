@@ -2,6 +2,22 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
+
+class Output
+{
+    public string responseBodyPrettier(string responseBody)
+    {   
+        string tempData = "";
+        string[] responseBodyPrettier ={};
+        for(int i=0; i<responseBody.Length; i++){
+            if(responseBody[i]=='a' && responseBody[i+1]=='q' && responseBody[i+2]=='i'){
+                tempData = $"aqi={responseBody[i+5]}{responseBody[i+6]}";
+                break;
+            }
+        }
+        return tempData;
+    }
+}
 class Program
 {
     static async Task Main(string[] args)
@@ -21,6 +37,10 @@ class Program
             string responseBody = await response.Content.ReadAsStringAsync();
 
             Console.WriteLine(responseBody);
+            Output Output = new Output();
+            string prettifiedBody = Output.responseBodyPrettier(responseBody);
+            Console.WriteLine(prettifiedBody);
+
             
         }
     }
