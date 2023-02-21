@@ -12,7 +12,7 @@ class Output
         string[] responseBodyPrettier ={};
         for(int i=0; i<responseBody.Length; i++){
             if(responseBody[i]=='a' && responseBody[i+1]=='q' && responseBody[i+2]=='i'){
-                int aqiQuality= ((int)responseBody[i+5] - '0')*10+((int)responseBody[i+6] - '0'); //what if aqiQuality is 100+? to fix
+                int aqiQuality= ((int)responseBody[i+5] - '0')*10+((int)responseBody[i+6] - '0'); //what if aqiQuality is 100+?
                 if(aqiQuality<50){
                     aqiTable = "Air quality is good";
                 }
