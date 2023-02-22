@@ -32,8 +32,13 @@ class Output
                     aqiTable = "Air quality is hazardous";
                 }
                 tempData = $"aqi={responseBody[i+5]}{responseBody[i+6]} - {aqiTable}";
-                break;
+                
             }
+            if(responseBody[i]=='p' && responseBody[i+1]=='m' && responseBody[i+2]=='2' && responseBody[i+3]=='5' && responseBody[i+5]==':'){
+                int pm25Quality= ((int)responseBody[i+11] - '0')*100+((int)responseBody[i+12] - '0')*10+((int)responseBody[i+13] - '0');
+                tempData+=$" pm25 - {pm25Quality}";
+                break;
+             }
         }
         return tempData;
     }
