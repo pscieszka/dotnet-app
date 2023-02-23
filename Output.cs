@@ -42,8 +42,11 @@ namespace dotnet_app
         }
         return tempData;
     }
-    public string cleaner(string responseBody){
-        return responseBody.Substring(0,300);
+    public string cleaner(string responseBody){ 
+        int index1 = responseBody.IndexOf("idx");
+        int index2 = responseBody.IndexOf("iaqi");
+        responseBody =  responseBody.Substring(0,index1) + responseBody.Substring(index2,200) ;
+            return responseBody;
     }
     }
 }
