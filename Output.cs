@@ -11,10 +11,13 @@ namespace dotnet_app
     {   
         string tempData = "";
         string aqiTable ="";
+        int aqiQuality = 0;
+        // int pm25Quality=0;
+        // int pm10Quality=0;
         string[] responseBodyPrettier ={};
         for(int i=0; i<responseBody.Length; i++){
-            if(responseBody[i]=='a' && responseBody[i+1]=='q' && responseBody[i+2]=='i'){
-                int aqiQuality= ((int)responseBody[i+5] - '0')*10+((int)responseBody[i+6] - '0'); //what if aqiQuality is 100+?
+            if(responseBody[i]=='a' && responseBody[i+1]=='q' && responseBody[i+2]=='i' && aqiQuality==0){
+                aqiQuality= ((int)responseBody[i+5] - '0')*10+((int)responseBody[i+6] - '0'); //what if aqiQuality is 100+?
                 if(aqiQuality<50){
                     aqiTable = "Air quality is good";
                 }
@@ -36,13 +39,11 @@ namespace dotnet_app
                 tempData = $"aqi={responseBody[i+5]}{responseBody[i+6]} - {aqiTable}";
                 
             }
-            if(responseBody[i]=='p' && responseBody[i+1]=='m' && responseBody[i+2]=='2' && responseBody[i+3]=='5' && responseBody[i+5]==':'){
-                int pm25Quality= ((int)responseBody[i+11] - '0')*100+((int)responseBody[i+12] - '0')*10+((int)responseBody[i+13] - '0');
-                tempData+=$" pm25 - {pm25Quality}";
-                break;
-             }
         }
         return tempData;
+    }
+    public string cleaner(string responseBody){
+        return responseBody.Substring(0,300);
     }
     }
 }

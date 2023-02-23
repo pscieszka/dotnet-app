@@ -20,11 +20,11 @@ class Program
             client.DefaultRequestHeaders.Add("User-Agent", "MyConsoleApp/1.0");
 
             HttpResponseMessage response = await client.GetAsync($"https://api.waqi.info/feed/{city}/?token={api_key}");
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            Console.WriteLine(responseBody);
             Output Output = new Output();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            responseBody = Output.cleaner(responseBody);
+            Console.WriteLine(responseBody);
+        
             string prettifiedBody = Output.responseBodyPrettier(responseBody);
             Console.WriteLine(prettifiedBody);
 
