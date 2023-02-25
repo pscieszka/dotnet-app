@@ -46,8 +46,15 @@ namespace dotnet_app
         int index1 = responseBody.IndexOf("idx");
         int index2 = responseBody.IndexOf("iaqi");
         string status ="";
+        if(responseBody.Contains("error")){
+            //check data message
+            return responseBody;
+        }
+       
+
         responseBody =  responseBody.Substring(0,index1) + responseBody.Substring(index2,200);
         responseBody = responseBody.Replace("{", "").Replace("}", " ").Replace(":", " ").Replace(",", "").Replace("\"", "");
+        responseBody += status;
         return responseBody;
     }
     }
