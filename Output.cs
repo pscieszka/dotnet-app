@@ -45,20 +45,21 @@ namespace dotnet_app
     public string cleaner(string responseBody){ 
         int index1 = responseBody.IndexOf("idx");
         int index2 = responseBody.IndexOf("iaqi");
-        string status ="";
-        if(responseBody.Contains("error")){
-            //check data message
-            return responseBody;
-        }
-       
-
-        responseBody =  responseBody.Substring(0,index1) + responseBody.Substring(index2,200);
-        responseBody = responseBody.Replace("{", "").Replace("}", " ").Replace(":", " ").Replace(",", "").Replace("\"", "");
-        responseBody += status;
+        responseBody =  responseBody.Substring(0,index1) + responseBody.Substring(index2,130);
+        responseBody = responseBody.Replace("{", "").Replace("}", " ").Replace(":", " ").Replace(",", "").Replace("\"", "").Replace("data","").Replace("v","");
         return responseBody;
     }
+    
+    public bool checkIfWorks(string responseBody){
+        if(responseBody.Contains("error")){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
-}
+}}
+
 // {"status":"ok","data":{"aqi":65,"idx":8689,"attributions":[{"url":"http://monitoring.krakow.pios.gov.pl/","name":"Regional Inspectorate for Environmental Protection in Krakow 
 // (WIOŚ - Wojewódzki Inspektorat Ochrony Środowiska w Krakowie)","logo":"poland-wios-krakowie.png"},{"url":"http://powietrze.gios.gov.pl/","name":"Główny inspektorat ochrony środowiska
 // ","logo":"poland-wios-national.png"},{"url":"https://waqi.info/","name":"World Air Quality Index Project"}],"city":{"geo":[50.057447,19.946008],"name":"Kraków-ul. Dietla, Małopolska, Poland
