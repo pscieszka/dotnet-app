@@ -91,6 +91,14 @@ namespace dotnet_app
             return true;
         }
     }
+    public string errorMessage(string responseBody){
+        string message="";
+        
+        message = responseBody.Replace("{", "").Replace("}", " ").Replace(":", " ").Replace(",", "").Replace("\"", "").Replace("data", "\n");
+        message = message.Remove(13, 1).Insert(6,":").Insert(14,"Message: ");
+
+        return message;
+    }
 }}
 
 //status ok aqi 25iaqi co  0.1 dew  -5 h  64 no2  6.5 o3  22.3 p  1014 pm10  7 pm25  25 so2  

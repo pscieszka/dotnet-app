@@ -21,14 +21,16 @@ class Program
             HttpResponseMessage response = await client.GetAsync($"https://api.waqi.info/feed/{city}/?token={api_key}");
             Output Output = new Output();
             string responseBody = await response.Content.ReadAsStringAsync();
+
             if(Output.checkIfWorks(responseBody)){
-            responseBody = Output.cleaner(responseBody);
-            Console.WriteLine(responseBody);
-            string prettifiedBody = Output.responseBodyPrettier(responseBody);
-            Console.WriteLine(prettifiedBody);
+                responseBody = Output.cleaner(responseBody);
+                Console.WriteLine(responseBody);
+                string prettifiedBody = Output.responseBodyPrettier(responseBody);
+                Console.WriteLine(prettifiedBody);
             }
             else {
-                Console.WriteLine("error");
+                responseBody = Output.errorMessage(responseBody);
+                Console.WriteLine(responseBody);
             }
 
             
