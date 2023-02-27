@@ -25,8 +25,6 @@ class Program
             if(Output.checkIfWorks(responseBody)){
                 responseBody = Output.cleaner(responseBody);
                 Console.WriteLine(responseBody);
-                string prettifiedBody = Output.responseBodyPrettier(responseBody);
-                Console.WriteLine(prettifiedBody);
             }
             else {
                 responseBody = Output.errorMessage(responseBody);
