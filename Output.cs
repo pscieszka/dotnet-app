@@ -7,38 +7,7 @@ namespace dotnet_app
 {
      public class Output
     {
-        public string aqiMessage(string responseBody)
-    {   
-        string aqiMessage = "";
-        string aqiTable ="";
-        int aqiQuality = 0;
-        for(int i=0; i<responseBody.Length; i++){
-            if(responseBody[i]=='a' && responseBody[i+1]=='q' && responseBody[i+2]=='i' && aqiQuality==0){
-                aqiQuality= ((int)responseBody[i+5] - '0')*10+((int)responseBody[i+6] - '0'); //what if aqiQuality is 100+?
-                if(aqiQuality<50){
-                    aqiTable = "Air quality is good";
-                }
-                else if(aqiQuality<100){
-                    aqiTable = "Air quality is moderate";
-                }
-                else if(aqiQuality<150){
-                    aqiTable = "Air quality is unhealthy for sensitive groups"; 
-                }
-                else if(aqiQuality<200){
-                    aqiTable = "Air quality is unhealthy";
-                }
-                else if(aqiQuality<300){
-                    aqiTable = "Air quality is very unhealthy";
-                }
-                else if(aqiQuality>300){
-                    aqiTable = "Air quality is hazardous";
-                }
-                aqiMessage = $"aqi={responseBody[i+5]}{responseBody[i+6]} - {aqiTable}";
-                
-            }
-        }
-        return aqiMessage;
-    }
+    
     public string cleaner(string responseBody){
         responseBody = responseBody.Replace("{", "").Replace("}", " ").Replace(":", " ").Replace(",", "").Replace("\"", "").Replace("v","").Replace("data", ""); 
         int index1 = responseBody.IndexOf("idx");
@@ -74,30 +43,35 @@ namespace dotnet_app
                     i++;
                 }
             }
-       
-           
         }
-        // if(aqiQuality<50){
-        //             aqiTable = "Air quality is good";
-        //         }
-        //         else if(aqiQuality<100){
-        //             aqiTable = "Air quality is moderate";
-        //         }
-        //         else if(aqiQuality<150){
-        //             aqiTable = "Air quality is unhealthy for sensitive groups"; 
-        //         }
-        //         else if(aqiQuality<200){
-        //             aqiTable = "Air quality is unhealthy";
-        //         }
-        //         else if(aqiQuality<300){
-        //             aqiTable = "Air quality is very unhealthy";
-        //         }
-        //         else if(aqiQuality>300){
-        //             aqiTable = "Air quality is hazardous";
-        //         }
+        string aqiMessage="";
+        int aqiInt = int.Parse(aqi);
+          
+        
+        if(aqiInt<50){
+            aqiMessage = "Air quality is good";
+            }
+        else if(aqiInt<100){
+            aqiMessage = "Air quality is moderate";
+            }
+        else if(aqiInt<150){
+            aqiMessage = "Air quality is unhealthy for sensitive groups"; 
+            }
+        else if(aqiInt<200){
+            aqiMessage = "Air quality is unhealthy";
+            }
+        else if(aqiInt<300){
+            aqiMessage = "Air quality is very unhealthy";
+            }
+        else if(aqiInt>300){
+            aqiMessage = "Air quality is hazardous";
+            }
         responseBody = $"Status: {status}\nAqi:{aqi} - {aqiMessage}\npm25: {pm25}\npm10: {pm10}";
         return responseBody;
     }
+
+
+
     public bool checkIfWorks(string responseBody){
         if(responseBody.Contains("error")){
             return false;
@@ -106,6 +80,10 @@ namespace dotnet_app
             return true;
         }
     }
+
+
+
+
     public string errorMessage(string responseBody){
         string message="";
         
@@ -114,6 +92,8 @@ namespace dotnet_app
 
         return message;
     }
-}}
 
-//status ok aqi 25iaqi co  0.1 dew  -5 h  64 no2  6.5 o3  22.3 p  1014 pm10  7 pm25  25 so2  
+
+}
+}
+
